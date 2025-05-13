@@ -6,6 +6,7 @@ This repository refers to tagger models that have already been trained and are r
 Clone this repository and its submodules.
 ```
 git clone https://github.com/CCL-KULeuven/taggers-dockerized
+
 ```
 ### Pull builds from Docker Hub
 Do you have docker and docker compose? Do you have access to the public Docker Hub [cclkuleuven](https://hub.docker.com/repositories/cclkuleuven)? Then you can clone this repository and run
@@ -49,10 +50,11 @@ docker compose --env-file dev.env up spacy-nl-sm
 ## Creating your own tagger
 To create your own tagger, use the base tagger as a starting point and overwrite `process.py`. I.e., start your Dockerfile with:
 ```
-FROM instituutnederlandsetaal/taggers-dockerized-pie-base:$tag
+FROM instituutnederlandsetaal/taggers-dockerized-base:$tag
 COPY --link process.py /
 ```
 And fill out the process() and (optionally) init() functions of [base/process.py](https://github.com/CCL-KULeuven/taggers-dockerized/blob/development/base/process.py).
+
 The `in_file` points to a plain text file. Currently, your tagger is expected to produce tsv as output. The output tsv must contain a header with at least the columns 'token', 'lemma', 'pos' defined in any order.
 
 ### Running your own tagger
