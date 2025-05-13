@@ -8,13 +8,7 @@ echo "Will build taggers with version <$VERSION_LABEL>. Set VERSION_LABEL to ove
 # Base image
 docker push instituutnederlandsetaal/taggers-dockerized-base:$VERSION_LABEL
 
-# PIE
-docker push instituutnederlandsetaal/taggers-dockerized-pie-base:$VERSION_LABEL
-docker push instituutnederlandsetaal/taggers-dockerized-pie-bab:$VERSION_LABEL
-docker push instituutnederlandsetaal/taggers-dockerized-pie-tdn:$VERSION_LABEL
-docker push instituutnederlandsetaal/taggers-dockerized-pie-crm:$VERSION_LABEL
-docker push instituutnederlandsetaal/taggers-dockerized-pie-gysseling:$VERSION_LABEL
+# UD-parsers
+docker push instituutnederlandsetaal/taggers-dockerized-spacy:$VERSION
+docker push instituutnederlandsetaal/taggers-dockerized-stanza:$VERSION
 
-# Huggingface
-# docker push instituutnederlandsetaal/taggers-dockerized-huggingface-base:$VERSION_LABEL
-# docker push instituutnederlandsetaal/taggers-dockerized-huggingface-tdn:$VERSION_LABEL

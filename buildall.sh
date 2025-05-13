@@ -1,19 +1,24 @@
 # Set the default label
-: ${VERSION_LABEL:=dev}
+: ${VERSION_LABEL:=1}
 
 echo "Will build taggers with version <$VERSION_LABEL>. Set VERSION_LABEL to override this."
 
 # Base image
 docker build -t instituutnederlandsetaal/taggers-dockerized-base:$VERSION_LABEL base
 
-# PIE
-docker build -t instituutnederlandsetaal/taggers-dockerized-pie-base:$VERSION_LABEL pie/base
-docker build -t instituutnederlandsetaal/taggers-dockerized-pie-bab:$VERSION_LABEL pie/bab
-docker build -t instituutnederlandsetaal/taggers-dockerized-pie-tdn:$VERSION_LABEL pie/tdn
-docker build -t instituutnederlandsetaal/taggers-dockerized-pie-crm:$VERSION_LABEL pie/crm
-docker build -t instituutnederlandsetaal/taggers-dockerized-pie-gysseling:$VERSION_LABEL pie/gysseling
+# Spacy
+docker build --build-arg VERSION=$VERSION_LABEL -t ccl-kuleuven/taggers-dockerized-spacy:$VERSION_LABEL spacy/base
 
-# Huggingface 
-# Require local building
-# docker build -t instituutnederlandsetaal/taggers-dockerized-huggingface-base:$VERSION_LABEL huggingface/base
-# docker build -t instituutnederlandsetaal/taggers-dockerized-huggingface-tdn:$VERSION_LABEL huggingface/tdn
+# UD-parsers
+docker build --build-arg VERSION=$VERSION_LABEL -t instituutnederlandsetaal/taggers-dockerized-stanza:$VERSION_LABEL stanza
+
+# Lettuce languages and variants
+docker build -t ccl-kuleuven/taggers-dockerized-lettuce:$VERSION_LABEL huggingface/lettuce
+
+# LETS languages
+#docker build -t instituutnederlandsetaal/taggers-dockerized-lets-nl:$VERSION_LABEL --build-arg LETS_LANG=nl lets/base
+#docker build -t instituutnederlandsetaal/taggers-dockerized-lets-de:$VERSION_LABEL --build-arg LETS_LANG=de lets/base
+#docker build -t instituutnederlandsetaal/taggers-dockerized-lets-fr:$VERSION_LABEL --build-arg LETS_LANG=fr lets/base
+#docker build -t instituutnederlandsetaal/taggers-dockerized-lets-en:$VERSION_LABEL --build-arg LETS_LANG=en lets/base
+
+

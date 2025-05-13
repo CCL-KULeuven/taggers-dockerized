@@ -1,1 +1,1 @@
-docker compose up spacy-nl-lg spacy-en-lg spacy-fr-lg spacy-de-lg
+docker compose up spacy-nl-sm spacy-en-sm spacy-fr-sm spacy-de-sm lets-nl lets-de lets-en lets-fr

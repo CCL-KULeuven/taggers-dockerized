@@ -6,4 +6,5 @@ echo "Will build taggers with version <$VERSION_LABEL>. Set VERSION_LABEL to ove
 # Base image
 docker build -t ccl-kuleuven/taggers-dockerized-base:$VERSION_LABEL base
 
-docker build --build-arg VERSION=$VERSION_LABEL -t ccl-kuleuven/taggers-dockerized-spacy:$VERSION_LABEL spacy/base
+# Lettuce languages and variants
+docker build -t ccl-kuleuven/taggers-dockerized-lettuce:$VERSION_LABEL huggingface/lettuce

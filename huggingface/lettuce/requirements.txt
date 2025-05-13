@@ -1,0 +1,4 @@
+transformers[torch]
+numpy<2
+spacy
+spacy_conll==4.0.1
