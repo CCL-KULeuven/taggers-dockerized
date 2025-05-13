@@ -1,14 +1,14 @@
-These taggers are split off of the Project https://github.com/INL/Galahad , but can also be run in standalone mode.
+These taggers are part of the project [textlens](https://github.com/CCL-KULeuven/textlens) , but can also be run in standalone mode.
 
 This repository refers to tagger models that have already been trained and are ready to be used in production. To train models, see [galahad-train-battery](https://github.com/INL/galahad-train-battery).
 
 ## Quick start
 Clone this repository and its submodules.
 ```
-git clone --recurse-submodules https://github.com/INL/taggers-dockerized
+git clone https://github.com/CCL-KULeuven/taggers-dockerized
 ```
 ### Pull builds from Docker Hub
-Do you have docker and docker compose? Do you have access to the public Docker Hub [instituutnederlandsetaal](https://hub.docker.com/repositories/instituutnederlandsetaal)? Then you can clone this repository and run
+Do you have docker and docker compose? Do you have access to the public Docker Hub [cclkuleuven](https://hub.docker.com/repositories/cclkuleuven)? Then you can clone this repository and run
 
 ```
 docker compose up
@@ -26,7 +26,7 @@ docker compose up [SPECIFIC_TAGGER_1] [SPECIFIC_TAGGER_2]
 ### Local builds
 Build the docker images: see `buildall.sh`.
 
-### Connecting to an Galahad-like endpoint
+### Connecting to a textlens/Galahad-like endpoint
 If you want to connect the taggers to an endpoint outside of a docker network, you can specify a `.env.dev` file like
 
 ```
@@ -52,7 +52,7 @@ To create your own tagger, use the base tagger as a starting point and overwrite
 FROM instituutnederlandsetaal/taggers-dockerized-pie-base:$tag
 COPY --link process.py /
 ```
-And fill out the process() and (optionally) init() functions of [base/process.py](https://github.com/INL/taggers-dockerized/blob/development/base/process.py).
+And fill out the process() and (optionally) init() functions of [base/process.py](https://github.com/CCL-KULeuven/taggers-dockerized/blob/development/base/process.py).
 The `in_file` points to a plain text file. Currently, your tagger is expected to produce tsv as output. The output tsv must contain a header with at least the columns 'token', 'lemma', 'pos' defined in any order.
 
 ### Running your own tagger
@@ -78,5 +78,5 @@ The `in_file` points to a plain text file. Currently, your tagger is expected to
 
 If you specified a devport, you can now find your tagger at `localhost` port devport.
 
-### Make Galahad aware of your tagger
-All that is left, is to add a yaml metadata file in the [server/data/taggers/](https://github.com/INL/Galahad/tree/development/server/data/taggers) folder of Galahad. See the [Galahad repository](https://github.com/INL/galahad) for more details.
+### Make textlens aware of your tagger
+All that is left, is to add a yaml metadata file in the [server/data/taggers/](https://github.com/CCL-KULeuven/textlens/tree/development/server/data/taggers) folder of textlens. See the [textlens repository](https://github.com/CCL-KULeuven/textlens) for more details.
