@@ -4,8 +4,6 @@ services:
         image: cclkuleuven/taggers-dockerized-spacy-nl-lg:${APP_VERSION}
         build:
             context: spacy/base
-        networks:
-            - taggers-network
         environment:
             - CALLBACK_SERVER=${CALLBACK_SERVER}
             - SPACY_MODEL=nl_core_news_lg
@@ -17,8 +15,6 @@ services:
         image: cclkuleuven/taggers-dockerized-spacy-en-lg:${APP_VERSION}
         build:
             context: spacy/base
-        networks:
-            - taggers-network
         environment:
             - CALLBACK_SERVER=${CALLBACK_SERVER}
             - SPACY_MODEL=en_core_web_lg
@@ -30,8 +26,6 @@ services:
         image: cclkuleuven/taggers-dockerized-spacy-fr-lg:${APP_VERSION}
         build:
             context: spacy/base
-        networks:
-            - taggers-network
         environment:
             - CALLBACK_SERVER=${CALLBACK_SERVER}
             - SPACY_MODEL=fr_core_news_lg
@@ -43,15 +37,13 @@ services:
         image: cclkuleuven/taggers-dockerized-spacy-de-lg:${APP_VERSION}
         build:
             context: spacy/base
-        networks:
-            - taggers-network
         environment:
             - CALLBACK_SERVER=${CALLBACK_SERVER}
             - SPACY_MODEL=de_core_news_lg
         restart: unless-stopped
         ports:
             - 8123:8080
-            
+
     # LeTs (ports: 813x)
     # lets-nl:
     #     image: cclkuleuven/taggers-dockerized-lets-nl:${APP_VERSION}
@@ -103,6 +95,6 @@ services:
     #         - 8133:8080
 
 networks:
-    taggers-network:
-        # external applications can attach to this network to access the taggers 
-        driver: bridge
+    default:
+        name: taggers-network
+        driver: bridge # external applications can attach to this network to access the taggers 
