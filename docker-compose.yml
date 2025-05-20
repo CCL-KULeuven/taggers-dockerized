@@ -1,7 +1,7 @@
 services:
     # spacy (ports: 812x)
     spacy-nl-lg:
-        image: ccl-kuleuven/taggers-dockerized-spacy-nl-lg:1
+        image: cclkuleuven/taggers-dockerized-spacy-nl-lg:${APP_VERSION}
         build:
             context: spacy/base
         networks:
@@ -14,7 +14,7 @@ services:
             - 8120:8080
 
     spacy-en-lg:
-        image: ccl-kuleuven/taggers-dockerized-spacy-en-lg:1
+        image: cclkuleuven/taggers-dockerized-spacy-en-lg:${APP_VERSION}
         build:
             context: spacy/base
         networks:
@@ -27,7 +27,7 @@ services:
             - 8121:8080
 
     spacy-fr-lg:
-        image: ccl-kuleuven/taggers-dockerized-spacy-fr-lg:1
+        image: cclkuleuven/taggers-dockerized-spacy-fr-lg:${APP_VERSION}
         build:
             context: spacy/base
         networks:
@@ -40,7 +40,7 @@ services:
             - 8122:8080
 
     spacy-de-lg:
-        image: ccl-kuleuven/taggers-dockerized-spacy-de-lg:1
+        image: cclkuleuven/taggers-dockerized-spacy-de-lg:${APP_VERSION}
         build:
             context: spacy/base
         networks:
@@ -51,55 +51,56 @@ services:
         restart: unless-stopped
         ports:
             - 8123:8080
+            
     # LeTs (ports: 813x)
-    lets-nl:
-        image: instituutnederlandsetaal/taggers-dockerized-lets-nl:dev
-        build:
-            context: lets/base
-        networks:
-            - taggers-network
-        environment:
-            - LETS_LANG=nl
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8130:8080
-    lets-fr:
-        image: instituutnederlandsetaal/taggers-dockerized-lets-fr:dev
-        build:
-            context: lets/base
-        networks:
-            - taggers-network
-        environment:
-            - LETS_LANG=fr
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8131:8080
-    lets-de:
-        image: instituutnederlandsetaal/taggers-dockerized-lets-de:dev
-        build:
-            context: lets/base
-        networks:
-            - taggers-network
-        environment:
-            - LETS_LANG=de
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8132:8080
-    lets-en:
-        image: instituutnederlandsetaal/taggers-dockerized-lets-en:dev
-        build:
-            context: lets/base
-        networks:
-            - taggers-network
-        environment:
-            - LETS_LANG=en
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8133:8080
+    # lets-nl:
+    #     image: cclkuleuven/taggers-dockerized-lets-nl:${APP_VERSION}
+    #     build:
+    #         context: lets/base
+    #     networks:
+    #         - taggers-network
+    #     environment:
+    #         - LETS_LANG=nl
+    #         - CALLBACK_SERVER=${CALLBACK_SERVER}
+    #     restart: unless-stopped
+    #     ports:
+    #         - 8130:8080
+    # lets-fr:
+    #     image: cclkuleuven/taggers-dockerized-lets-fr:${APP_VERSION}
+    #     build:
+    #         context: lets/base
+    #     networks:
+    #         - taggers-network
+    #     environment:
+    #         - LETS_LANG=fr
+    #         - CALLBACK_SERVER=${CALLBACK_SERVER}
+    #     restart: unless-stopped
+    #     ports:
+    #         - 8131:8080
+    # lets-de:
+    #     image: cclkuleuven/taggers-dockerized-lets-de:${APP_VERSION}
+    #     build:
+    #         context: lets/base
+    #     networks:
+    #         - taggers-network
+    #     environment:
+    #         - LETS_LANG=de
+    #         - CALLBACK_SERVER=${CALLBACK_SERVER}
+    #     restart: unless-stopped
+    #     ports:
+    #         - 8132:8080
+    # lets-en:
+    #     image: cclkuleuven/taggers-dockerized-lets-en:${APP_VERSION}
+    #     build:
+    #         context: lets/base
+    #     networks:
+    #         - taggers-network
+    #     environment:
+    #         - LETS_LANG=en
+    #         - CALLBACK_SERVER=${CALLBACK_SERVER}
+    #     restart: unless-stopped
+    #     ports:
+    #         - 8133:8080
 
 networks:
     taggers-network:

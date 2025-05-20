@@ -1,5 +1,5 @@
 ARG tag=dev
-FROM instituutnederlandsetaal/taggers-dockerized-base:$tag
+FROM cclkuleuven/taggers-dockerized-base:$tag
 RUN apt-get update && apt-get install -y build-essential gcc g++ python-dev-is-python3 unzip
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
