@@ -1,14 +1,15 @@
-# Set the default label
-: ${VERSION_LABEL:=dev}
-
-echo "Will build taggers with version <$VERSION_LABEL>. Set VERSION_LABEL to override this."
+echo "Will build taggers with version <$APP_VERSION>. Set APP_VERSION to override this."
 
 ./buildall.sh
 
 # Base image
-docker push instituutnederlandsetaal/taggers-dockerized-base:$VERSION_LABEL
+docker push cclkuleuven/taggers-dockerized-base:$APP_VERSION
 
-# UD-parsers
-docker push instituutnederlandsetaal/taggers-dockerized-spacy:$VERSION
-docker push instituutnederlandsetaal/taggers-dockerized-stanza:$VERSION
-
+# Taggers
+docker push cclkuleuven/taggers-dockerized-spacy:$APP_VERSION
+docker push cclkuleuven/taggers-dockerized-stanza:$APP_VERSION
+docker push cclkuleuven/taggers-dockerized-lettuce:$APP_VERSION
+docker push cclkuleuven/taggers-dockerized-lets-nl:$APP_VERSION
+docker push cclkuleuven/taggers-dockerized-lets-de:$APP_VERSION
+docker push cclkuleuven/taggers-dockerized-lets-fr:$APP_VERSION
+docker push cclkuleuven/taggers-dockerized-lets-en:$APP_VERSION

@@ -1,9 +1,6 @@
-# Set the default label
-: ${VERSION_LABEL:=dev}
-
-echo "Will build taggers with version <$VERSION_LABEL>. Set VERSION_LABEL to override this."
+echo "Will build taggers with version <$APP_VERSION>. Set APP_VERSION to override this."
 
 # Base image
-docker build -t ccl-kuleuven/taggers-dockerized-base:$VERSION_LABEL base
+docker build -t cclkuleuven/taggers-dockerized-base:$APP_VERSION base
 
-docker build --build-arg VERSION=$VERSION_LABEL -t ccl-kuleuven/taggers-dockerized-spacy:$VERSION_LABEL spacy/base
+docker build --build-arg VERSION=$APP_VERSION -t cclkuleuven/taggers-dockerized-spacy:$APP_VERSION spacy/base

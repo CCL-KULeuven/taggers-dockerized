@@ -18,6 +18,6 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push 
-        run: ./buildandpushall.sh
+        run: source dev.env; ./buildandpushall.sh
         env:
           VERSION_LABEL: dev

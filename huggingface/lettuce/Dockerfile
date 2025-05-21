@@ -1,5 +1,5 @@
-ARG tag=dev
-FROM ccl-kuleuven/taggers-dockerized-base:$tag
+ARG TAG=dev
+FROM cclkuleuven/taggers-dockerized-base:$TAG
 ARG HUGGINGFACE_MODEL
 ENV HUGGINGFACE_MODEL=${HUGGINGFACE_MODEL}
 COPY requirements.txt ./

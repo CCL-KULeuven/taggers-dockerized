@@ -1,5 +1,5 @@
-ARG VERSION=dev
-FROM ccl-kuleuven/taggers-dockerized-base:$VERSION
+ARG TAG=dev
+FROM cclkuleuven/taggers-dockerized-base:$TAG
 
 # Install requirements
 COPY requirements.txt ./
