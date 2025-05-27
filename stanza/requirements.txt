@@ -1,2 +1,2 @@
-stanza==1.9.2
+stanza==1.10.1
 conllu==6.0.0
