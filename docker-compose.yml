@@ -7,7 +7,7 @@ services:
             - SPACY_MODEL=nl_core_news_lg
         restart: unless-stopped
         ports:
-            - 8120:8080
+            - 8110:8080
 
     spacy-en:
         image: cclkuleuven/taggers-dockerized-spacy:${APP_VERSION}
@@ -16,7 +16,7 @@ services:
             - SPACY_MODEL=en_core_web_lg
         restart: unless-stopped
         ports:
-            - 8121:8080
+            - 8111:8080
 
     spacy-fr:
         image: cclkuleuven/taggers-dockerized-spacy:${APP_VERSION}
@@ -25,7 +25,7 @@ services:
             - SPACY_MODEL=fr_core_news_lg
         restart: unless-stopped
         ports:
-            - 8122:8080
+            - 8112:8080
 
     spacy-de:
         image: cclkuleuven/taggers-dockerized-spacy:${APP_VERSION}
@@ -34,7 +34,7 @@ services:
             - SPACY_MODEL=de_core_news_lg
         restart: unless-stopped
         ports:
-            - 8123:8080
+            - 8113:8080
     # LeTs (ports: 813x)
     lets-nl:
         image: cclkuleuven/taggers-dockerized-lets-nl:${APP_VERSION}
