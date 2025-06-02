@@ -1,6 +1,6 @@
 services:
     # spacy (ports: 812x)
-    spacy-nl:
+    spacy-nl-lg:
         image: cclkuleuven/taggers-dockerized-spacy:${APP_VERSION}
         environment:
             - CALLBACK_SERVER=${CALLBACK_SERVER}
@@ -9,7 +9,7 @@ services:
         ports:
             - 8810:8080
 
-    spacy-en:
+    spacy-en-lg:
         image: cclkuleuven/taggers-dockerized-spacy:${APP_VERSION}
         environment:
             - CALLBACK_SERVER=${CALLBACK_SERVER}
@@ -18,7 +18,7 @@ services:
         ports:
             - 8811:8080
 
-    spacy-fr:
+    spacy-fr-lg:
         image: cclkuleuven/taggers-dockerized-spacy:${APP_VERSION}
         environment:
             - CALLBACK_SERVER=${CALLBACK_SERVER}
@@ -27,7 +27,7 @@ services:
         ports:
             - 8812:8080
 
-    spacy-de:
+    spacy-de-lg:
         image: cclkuleuven/taggers-dockerized-spacy:${APP_VERSION}
         environment:
             - CALLBACK_SERVER=${CALLBACK_SERVER}
