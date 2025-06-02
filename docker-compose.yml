@@ -7,7 +7,7 @@ services:
             - SPACY_MODEL=nl_core_news_lg
         restart: unless-stopped
         ports:
-            - 8110:8080
+            - 8810:8080
 
     spacy-en:
         image: cclkuleuven/taggers-dockerized-spacy:${APP_VERSION}
@@ -16,7 +16,7 @@ services:
             - SPACY_MODEL=en_core_web_lg
         restart: unless-stopped
         ports:
-            - 8111:8080
+            - 8811:8080
 
     spacy-fr:
         image: cclkuleuven/taggers-dockerized-spacy:${APP_VERSION}
@@ -25,7 +25,7 @@ services:
             - SPACY_MODEL=fr_core_news_lg
         restart: unless-stopped
         ports:
-            - 8112:8080
+            - 8812:8080
 
     spacy-de:
         image: cclkuleuven/taggers-dockerized-spacy:${APP_VERSION}
@@ -34,127 +34,127 @@ services:
             - SPACY_MODEL=de_core_news_lg
         restart: unless-stopped
         ports:
-            - 8113:8080
-    # LeTs (ports: 813x)
-    lets-nl:
-        image: cclkuleuven/taggers-dockerized-lets-nl:${APP_VERSION}
-        build:
-            context: lets/base
-        environment:
-            - LETS_LANG=nl
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8130:8080
-    lets-fr:
-        image: cclkuleuven/taggers-dockerized-lets-fr:${APP_VERSION}
-        build:
-            context: lets/base
-        environment:
-            - LETS_LANG=fr
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8131:8080
-    lets-de:
-        image: cclkuleuven/taggers-dockerized-lets-de:${APP_VERSION}
-        build:
-            context: lets/base
-        environment:
-            - LETS_LANG=de
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8132:8080
-    lets-en:
-        image: cclkuleuven/taggers-dockerized-lets-en:${APP_VERSION}
-        build:
-            context: lets/base
-        environment:
-            - LETS_LANG=en
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8133:8080
+            - 8813:8080
+    # # LeTs (ports: 813x)
+    # lets-nl:
+    #     image: cclkuleuven/taggers-dockerized-lets-nl:${APP_VERSION}
+    #     build:
+    #         context: lets/base
+    #     environment:
+    #         - LETS_LANG=nl
+    #         - CALLBACK_SERVER=${CALLBACK_SERVER}
+    #     restart: unless-stopped
+    #     ports:
+    #         - 8130:8080
+    # lets-fr:
+    #     image: cclkuleuven/taggers-dockerized-lets-fr:${APP_VERSION}
+    #     build:
+    #         context: lets/base
+    #     environment:
+    #         - LETS_LANG=fr
+    #         - CALLBACK_SERVER=${CALLBACK_SERVER}
+    #     restart: unless-stopped
+    #     ports:
+    #         - 8131:8080
+    # lets-de:
+    #     image: cclkuleuven/taggers-dockerized-lets-de:${APP_VERSION}
+    #     build:
+    #         context: lets/base
+    #     environment:
+    #         - LETS_LANG=de
+    #         - CALLBACK_SERVER=${CALLBACK_SERVER}
+    #     restart: unless-stopped
+    #     ports:
+    #         - 8132:8080
+    # lets-en:
+    #     image: cclkuleuven/taggers-dockerized-lets-en:${APP_VERSION}
+    #     build:
+    #         context: lets/base
+    #     environment:
+    #         - LETS_LANG=en
+    #         - CALLBACK_SERVER=${CALLBACK_SERVER}
+    #     restart: unless-stopped
+    #     ports:
+    #         - 8133:8080
 
-    # Lettuce (ports: 814x)
-    lettuce-nl-mono:
-        image: cclkuleuven/taggers-dockerized-lettuce:${APP_VERSION}
-        environment:
-            - HUGGINGFACE_MODEL=pranaydeeps/lettuce_pos_nl_mono
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8140:8080
-    lettuce-nl-xlm:
-        image: cclkuleuven/taggers-dockerized-lettuce:${APP_VERSION}
-        environment:
-            - HUGGINGFACE_MODEL=pranaydeeps/lettuce_pos_nl_xlm
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8141:8080
-    lettuce-de-mono:
-        image: cclkuleuven/taggers-dockerized-lettuce:${APP_VERSION}
-        build:
-            context: huggingface/lettuce
-        environment:
-            - HUGGINGFACE_MODEL=pranaydeeps/lettuce_pos_de_mono
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8142:8080
-    lettuce-de-xlm:
-        image: cclkuleuven/taggers-dockerized-lettuce:${APP_VERSION}
-        build:
-            context: huggingface/lettuce
-        environment:
-            - HUGGINGFACE_MODEL=pranaydeeps/lettuce_pos_de_xlm
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8143:8080
-    lettuce-fr-mono:
-        image: cclkuleuven/taggers-dockerized-lettuce:${APP_VERSION}
-        build:
-            context: huggingface/lettuce
-        environment:
-            - HUGGINGFACE_MODEL=pranaydeeps/lettuce_pos_fr_mono
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8144:8080
-    lettuce-fr-xlm:
-        image: cclkuleuven/taggers-dockerized-lettuce:${APP_VERSION}
-        build:
-            context: huggingface/lettuce
-        environment:
-            - HUGGINGFACE_MODEL=pranaydeeps/lettuce_pos_fr_xlm
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8145:8080
+    # # Lettuce (ports: 814x)
+    # lettuce-nl-mono:
+    #     image: cclkuleuven/taggers-dockerized-lettuce:${APP_VERSION}
+    #     environment:
+    #         - HUGGINGFACE_MODEL=pranaydeeps/lettuce_pos_nl_mono
+    #         - CALLBACK_SERVER=${CALLBACK_SERVER}
+    #     restart: unless-stopped
+    #     ports:
+    #         - 8140:8080
+    # lettuce-nl-xlm:
+    #     image: cclkuleuven/taggers-dockerized-lettuce:${APP_VERSION}
+    #     environment:
+    #         - HUGGINGFACE_MODEL=pranaydeeps/lettuce_pos_nl_xlm
+    #         - CALLBACK_SERVER=${CALLBACK_SERVER}
+    #     restart: unless-stopped
+    #     ports:
+    #         - 8141:8080
+    # lettuce-de-mono:
+    #     image: cclkuleuven/taggers-dockerized-lettuce:${APP_VERSION}
+    #     build:
+    #         context: huggingface/lettuce
+    #     environment:
+    #         - HUGGINGFACE_MODEL=pranaydeeps/lettuce_pos_de_mono
+    #         - CALLBACK_SERVER=${CALLBACK_SERVER}
+    #     restart: unless-stopped
+    #     ports:
+    #         - 8142:8080
+    # lettuce-de-xlm:
+    #     image: cclkuleuven/taggers-dockerized-lettuce:${APP_VERSION}
+    #     build:
+    #         context: huggingface/lettuce
+    #     environment:
+    #         - HUGGINGFACE_MODEL=pranaydeeps/lettuce_pos_de_xlm
+    #         - CALLBACK_SERVER=${CALLBACK_SERVER}
+    #     restart: unless-stopped
+    #     ports:
+    #         - 8143:8080
+    # lettuce-fr-mono:
+    #     image: cclkuleuven/taggers-dockerized-lettuce:${APP_VERSION}
+    #     build:
+    #         context: huggingface/lettuce
+    #     environment:
+    #         - HUGGINGFACE_MODEL=pranaydeeps/lettuce_pos_fr_mono
+    #         - CALLBACK_SERVER=${CALLBACK_SERVER}
+    #     restart: unless-stopped
+    #     ports:
+    #         - 8144:8080
+    # lettuce-fr-xlm:
+    #     image: cclkuleuven/taggers-dockerized-lettuce:${APP_VERSION}
+    #     build:
+    #         context: huggingface/lettuce
+    #     environment:
+    #         - HUGGINGFACE_MODEL=pranaydeeps/lettuce_pos_fr_xlm
+    #         - CALLBACK_SERVER=${CALLBACK_SERVER}
+    #     restart: unless-stopped
+    #     ports:
+    #         - 8145:8080
 
-    lettuce-en-mono:
-        image: cclkuleuven/taggers-dockerized-lettuce:${APP_VERSION}
-        build:
-            context: huggingface/lettuce
-        environment:
-            - HUGGINGFACE_MODEL=pranaydeeps/lettuce_pos_en_mono
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8146:8080
-    lettuce-en-xlm:
-        image: cclkuleuven/taggers-dockerized-lettuce:${APP_VERSION}
-        build:
-            context: huggingface/lettuce
-        environment:
-            - HUGGINGFACE_MODEL=pranaydeeps/lettuce_pos_en_xlm
-            - CALLBACK_SERVER=${CALLBACK_SERVER}
-        restart: unless-stopped
-        ports:
-            - 8147:8080
+    # lettuce-en-mono:
+    #     image: cclkuleuven/taggers-dockerized-lettuce:${APP_VERSION}
+    #     build:
+    #         context: huggingface/lettuce
+    #     environment:
+    #         - HUGGINGFACE_MODEL=pranaydeeps/lettuce_pos_en_mono
+    #         - CALLBACK_SERVER=${CALLBACK_SERVER}
+    #     restart: unless-stopped
+    #     ports:
+    #         - 8146:8080
+    # lettuce-en-xlm:
+    #     image: cclkuleuven/taggers-dockerized-lettuce:${APP_VERSION}
+    #     build:
+    #         context: huggingface/lettuce
+    #     environment:
+    #         - HUGGINGFACE_MODEL=pranaydeeps/lettuce_pos_en_xlm
+    #         - CALLBACK_SERVER=${CALLBACK_SERVER}
+    #     restart: unless-stopped
+    #     ports:
+    #         - 8147:8080
 
     # stanza (ports: 819x)
     stanza-nl:
