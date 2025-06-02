@@ -32,6 +32,7 @@ def init() -> None:
     stanza_model = os.getenv("STANZA_LANG")
     nlp = stanza.Pipeline(
             lang=stanza_model,
+            processors="tokenize,mwt,pos,lemma,ner,depparse",
             use_gpu=False,
     )
 
