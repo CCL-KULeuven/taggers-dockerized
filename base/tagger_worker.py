@@ -52,7 +52,8 @@ def run_pending_tasks() -> None:
                 # Extra None check for typing
                 if (not is_pool_running(pool)) or pool is None:
                     # Spawn pool if not running
-                    pool = mp.Pool(processes=1, initializer=process.init)
+                    # pool = mp.Pool(processes=1, initializer=process.init)
+                    print("WARNING: no pool found")
                 # Perform task at running pool
                 pool.apply_async(process_file, args=(sl.filename,))
                 # Only start one task at a time, so return.
