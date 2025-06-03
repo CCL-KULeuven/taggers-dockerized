@@ -210,4 +210,4 @@ if __name__ == "__main__":
     # https://pypi.org/project/schedule/
     while True:
         run_pending_tasks()
-        time.sleep(1)
+        time.sleep(30)
