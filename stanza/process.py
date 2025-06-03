@@ -42,7 +42,7 @@ def process(in_file: str, out_file: str) -> None:
     Process the file at path "in_file" and write the result to path "out_file".
     """
     t_start = time.time()
-    with open(out_file, "x", encoding="utf-8") as f_out:
+    with open(out_file, "w+", encoding="utf-8") as f_out:
         with open(in_file, "r", encoding="utf-8") as f_in:
             doc = f_in.read()
             result = nlp(doc)
