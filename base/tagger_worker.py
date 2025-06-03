@@ -19,8 +19,6 @@ from multiprocessing.pool import Pool
 from typing import Optional
 import subprocess
 import requests
-import traceback
-import pathlib
 
 # Local
 import process
@@ -30,7 +28,6 @@ from statuslogger import StatusLogger, ProcessStatus
 from process import PROCESSING_SPEED
 
 CALLBACK_SERVER: str = os.getenv("CALLBACK_SERVER") or ""
-NUM_WORKERS = int(os.getenv("NUM_WORKERS") or 1)
 
 
 def run_pending_tasks() -> None:
@@ -41,8 +38,7 @@ def run_pending_tasks() -> None:
     global pool
 
     # One task at a time.
-    tasks_in_queue = pool._taskqueue.qsize()
-    if tasks_in_queue > 0:
+    if StatusLogger.busy_task_exists():
         return
 
     # Start new task when not busy
@@ -56,9 +52,11 @@ def run_pending_tasks() -> None:
                 # Extra None check for typing
                 if (not is_pool_running(pool)) or pool is None:
                     # Spawn pool if not running
-                    pool = mp.Pool(processes=NUM_WORKERS, initializer=process.init)
+                    pool = mp.Pool(processes=1, initializer=process.init)
                 # Perform task at running pool
                 pool.apply_async(process_file, args=(sl.filename,))
+                # Only start one task at a time, so return.
+                return
 
 
 def process_file(filename: str):
@@ -85,9 +83,9 @@ def process_file(filename: str):
         # Process failed, free up the pid
         ps.delete_status()
         sl.error(f"An exception occurred: {e}")
-        print(traceback.format_exc())
         # copy input file to error folder if it exists
-        if os.path.isfile(in_path):
+        if os.path.exists(in_path):
+            sl.error("Moving input file to error folder")
             os.rename(in_path, error_path)
         if CALLBACK_SERVER != "":
             sl.error("Sending error to callback server")
@@ -99,32 +97,20 @@ def tag(
 ) -> None:
     """
     Attempt to tag the file by the tagger with a timeout.
-    Send the result to the server, whether successful or not.
-    Also appropriately logs the status.
+    Send the result to the server, whether sucessful or not.
+    Also appropiately logs the status.
     """
     # 300s = 5min fixed time
     # plus
     # bytes * speed variable time
-    in_bytes_size = None
-    while in_bytes_size is None:
-        if os.path.isfile(in_path):
-            try:
-                in_bytes_size = int(
-                    subprocess.check_output(["du", "-sb", in_path])
-                    .split()[0]
-                    .decode("utf-8")
-                )
-            except Exception as e:
-                print(f"Error getting file size: {e}")
-                time.sleep(1)
-        else:
-            raise FileNotFoundError(f"File {in_path} not found")
+    in_bytes_size = int(
+        subprocess.check_output(["du", "-sb", in_path]).split()[0].decode("utf-8")
+    )
+    TIMEOUT = 300 + in_bytes_size + PROCESSING_SPEED
+    sl.busy("Will process with a timeout after " + str(TIMEOUT) + " seconds")
 
-    time_out = 300 + in_bytes_size + PROCESSING_SPEED
-    sl.busy("Will process with a timeout after " + str(time_out) + " seconds")
-
-    # Runs the respective tagger software synchronously.
-    @timeout(time_out, os.strerror(errno.ETIME))
+    # Runs the respective tagger software.
+    @timeout(TIMEOUT, os.strerror(errno.ETIME))
     def doTagging():
         process.process(in_path, out_path)
 
@@ -133,7 +119,11 @@ def tag(
     # Done processing
     ps.delete_status()  # Frees up the tagger
     sl.finished("Removing input file")
-    pathlib.Path(in_path).unlink(missing_ok=True)
+    # "try", because the task might have been cancelled and deleted in the meantime.
+    try:
+        os.remove(in_path)
+    except:
+        pass
 
     sl.finished(
         "Finished processing %s, result has size %d"
@@ -177,9 +167,8 @@ def send_error_to_callback_server(filename: str, out_path: str, message: str) ->
     Send the error to the callback server and keep or delete the file based on the server response.
     """
     url = CALLBACK_SERVER + "/error"
-    payload = {"file_id": filename}
-    json_data = {"file_id": filename, "message": message}
-    r = requests.post(url, json=json_data, params=payload)
+    payload = {"file_id": filename, "message": message}
+    r = requests.post(url, data=payload)
     keep_or_delete_file(r, out_path)
 
 
@@ -199,15 +188,12 @@ def is_pool_running(pool: Optional[Pool]) -> bool:
 
 # Pool needs to be defined after the functions it will execute.
 # https://stackoverflow.com/questions/41385708/multiprocessing-example-giving-attributeerror#comment101561695_42383397
-pool = None
+pool: Optional[Pool] = mp.Pool(processes=1, initializer=process.init)
 
+
+# It is ugly, but it is also used here:
+# https://pypi.org/project/schedule/
 if __name__ == "__main__":
-    # Can't use fork with the gpu.
-    mp.set_start_method("spawn", force=True)
-    pool = mp.Pool(processes=NUM_WORKERS, initializer=process.init)
-
-    # It is ugly, but it is also used here:
-    # https://pypi.org/project/schedule/
     while True:
         run_pending_tasks()
-        time.sleep(30)
+        time.sleep(1)
