@@ -34,6 +34,7 @@ def init() -> None:
             lang=stanza_model,
             processors="tokenize,mwt,pos,lemma,ner,depparse",
             use_gpu=False,
+            download_method=None,
     )
 
 
