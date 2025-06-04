@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  dev-images-to-docker:
+  prod-images-to-docker:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,4 +23,4 @@ jobs:
       - name: Build and push 
         run: ./buildandpushall.sh
         env:
-          APP_VERSION: release
+          APP_VERSION: ${{ github.ref_name }}
