@@ -1,12 +1,15 @@
-echo "Will build taggers with version <$APP_VERSION>. Set VERSION_LABEL to override this."
+echo "Will build taggers with version <$APP_VERSION>. Set APP_VERSION to override this."
 
 ./buildall.sh
 
 # Base image
 docker push cclkuleuven/taggers-dockerized-base:$APP_VERSION
 
-# Spacy
-docker push cclkuleuven/taggers-dockerized-spacy-nl-lg:$APP_VERSION
-docker push cclkuleuven/taggers-dockerized-spacy-en-lg:$APP_VERSION
-docker push cclkuleuven/taggers-dockerized-spacy-de-lg:$APP_VERSION
-docker push cclkuleuven/taggers-dockerized-spacy-fr-lg:$APP_VERSION
+# Taggers
+docker push cclkuleuven/taggers-dockerized-spacy:$APP_VERSION
+docker push cclkuleuven/taggers-dockerized-stanza:$APP_VERSION
+# docker push cclkuleuven/taggers-dockerized-lettuce:$APP_VERSION
+# docker push cclkuleuven/taggers-dockerized-lets-nl:$APP_VERSION
+# docker push cclkuleuven/taggers-dockerized-lets-de:$APP_VERSION
+# docker push cclkuleuven/taggers-dockerized-lets-fr:$APP_VERSION
+# docker push cclkuleuven/taggers-dockerized-lets-en:$APP_VERSION
