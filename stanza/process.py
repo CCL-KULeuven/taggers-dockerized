@@ -28,14 +28,17 @@ def init() -> None:
     Any initialization the tagger may need before processing.
     """
     global nlp
-    print("running initialization")
-    stanza_model = os.getenv("STANZA_LANG")
-    nlp = stanza.Pipeline(
-            lang=stanza_model,
-            processors="tokenize,mwt,pos,lemma,ner,depparse",
-            use_gpu=False,
-            download_method=None,
-    )
+    if nlp:
+        print("already initialized!")
+    else:
+        print("running initialization")
+        stanza_model = os.getenv("STANZA_LANG")
+        nlp = stanza.Pipeline(
+                lang=stanza_model,
+                processors="tokenize,mwt,pos,lemma,ner,depparse",
+                use_gpu=False,
+                download_method=None,
+        )
 
 
 def process(in_file: str, out_file: str) -> None:
@@ -43,7 +46,7 @@ def process(in_file: str, out_file: str) -> None:
     Process the file at path "in_file" and write the result to path "out_file".
     """
     t_start = time.time()
-    with open(out_file, "w+", encoding="utf-8") as f_out:
+    with open(out_file, "x", encoding="utf-8") as f_out:
         with open(in_file, "r", encoding="utf-8") as f_in:
             doc = f_in.read()
             result = nlp(doc)
