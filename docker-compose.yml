@@ -35,47 +35,47 @@ services:
         restart: unless-stopped
         ports:
             - 8813:8080
-    # # LeTs (ports: 813x)
-    # lets-nl:
-    #     image: cclkuleuven/taggers-dockerized-lets-nl:${APP_VERSION}
-    #     build:
-    #         context: lets/base
-    #     environment:
-    #         - LETS_LANG=nl
-    #         - CALLBACK_SERVER=${CALLBACK_SERVER}
-    #     restart: unless-stopped
-    #     ports:
-    #         - 8130:8080
-    # lets-fr:
-    #     image: cclkuleuven/taggers-dockerized-lets-fr:${APP_VERSION}
-    #     build:
-    #         context: lets/base
-    #     environment:
-    #         - LETS_LANG=fr
-    #         - CALLBACK_SERVER=${CALLBACK_SERVER}
-    #     restart: unless-stopped
-    #     ports:
-    #         - 8131:8080
-    # lets-de:
-    #     image: cclkuleuven/taggers-dockerized-lets-de:${APP_VERSION}
-    #     build:
-    #         context: lets/base
-    #     environment:
-    #         - LETS_LANG=de
-    #         - CALLBACK_SERVER=${CALLBACK_SERVER}
-    #     restart: unless-stopped
-    #     ports:
-    #         - 8132:8080
-    # lets-en:
-    #     image: cclkuleuven/taggers-dockerized-lets-en:${APP_VERSION}
-    #     build:
-    #         context: lets/base
-    #     environment:
-    #         - LETS_LANG=en
-    #         - CALLBACK_SERVER=${CALLBACK_SERVER}
-    #     restart: unless-stopped
-    #     ports:
-    #         - 8133:8080
+    # LeTs (ports: 813x)
+    lets-nl:
+        image: cclkuleuven/taggers-dockerized-lets-nl:${APP_VERSION}
+        build:
+            context: lets/base
+        environment:
+            - LETS_LANG=nl
+            - CALLBACK_SERVER=${CALLBACK_SERVER}
+        restart: unless-stopped
+        ports:
+            - 8130:8080
+    lets-fr:
+        image: cclkuleuven/taggers-dockerized-lets-fr:${APP_VERSION}
+        build:
+            context: lets/base
+        environment:
+            - LETS_LANG=fr
+            - CALLBACK_SERVER=${CALLBACK_SERVER}
+        restart: unless-stopped
+        ports:
+            - 8131:8080
+    lets-de:
+        image: cclkuleuven/taggers-dockerized-lets-de:${APP_VERSION}
+        build:
+            context: lets/base
+        environment:
+            - LETS_LANG=de
+            - CALLBACK_SERVER=${CALLBACK_SERVER}
+        restart: unless-stopped
+        ports:
+            - 8132:8080
+    lets-en:
+        image: cclkuleuven/taggers-dockerized-lets-en:${APP_VERSION}
+        build:
+            context: lets/base
+        environment:
+            - LETS_LANG=en
+            - CALLBACK_SERVER=${CALLBACK_SERVER}
+        restart: unless-stopped
+        ports:
+            - 8133:8080
 
     # # Lettuce (ports: 814x)
     # lettuce-nl-mono:
